@@ -1,0 +1,52 @@
+backend:
+  name: git-gateway
+  branch: main # or master
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# This allows the admin to preview changes in real-time
+display_url: https://ideindonesia.info
+
+collections:
+  # 1. Global Settings (Customizability)
+  - name: "settings"
+    label: "Site Settings"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - file: "content/settings/global.json"
+        label: "Global Config"
+        name: "global"
+        fields:
+          - {label: "Site Title", name: "site_title", widget: "string"}
+          - {label: "Hero Headline", name: "hero_headline", widget: "string"}
+          - {label: "Hero Subtext", name: "hero_subtext", widget: "text"}
+          - {label: "Contact Email", name: "contact_email", widget: "string"}
+          - {label: "Primary Color", name: "primary_color", widget: "color"}
+
+  # 2. Events Management (Add/Edit/Delete)
+  - name: "events"
+    label: "Events"
+    folder: "content/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Date", name: "date", widget: "datetime"}
+      - {label: "Location", name: "location", widget: "string", default: "Caulfield C110"}
+      - {label: "Cover Image", name: "thumbnail", widget: "image", required: false}
+      - {label: "Event Description", name: "body", widget: "markdown"}
+      - {label: "Speaker Name", name: "speaker", widget: "string", required: false}
+
+  # 3. Team/Members
+  - name: "team"
+    label: "Team Members"
+    folder: "content/team"
+    create: true
+    fields:
+      - {label: "Name", name: "title", widget: "string"}
+      - {label: "Role", name: "role", widget: "string"}
+      - {label: "Bio", name: "body", widget: "markdown"}
+      - {label: "Photo", name: "photo", widget: "image"}
